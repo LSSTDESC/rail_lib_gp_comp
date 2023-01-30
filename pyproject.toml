@@ -22,6 +22,7 @@ dynamic = ["version"]
 dependencies = [
     "numpy",
     "scipy",
+    "astropy"
 ]
 
 [project.optional-dependencies]
