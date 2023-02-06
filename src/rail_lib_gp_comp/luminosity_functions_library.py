@@ -12,13 +12,13 @@ from abc import ABC, abstractmethod
 import numpy as np
 from astropy import units as u
 
-# gal_pop_model_components imports
+# rail_lib_gp_comp imports
 from utils.utils_luminosity_function import compute_lower_truncation_scaled_schechter_random_variable
 from utils.utils_luminosity_function import gamma_function_integration_for_redshift
 from utils.utils_luminosity_function import get_minimum_limiting_absolute_magnitude, sample_from_schechter_function
 
 
-class LuminosityFunction(ABC):
+class LuminosityFunctionModel(ABC):
     def __init__(self):
         pass
 
@@ -47,7 +47,7 @@ class LuminosityFunction(ABC):
         pass
 
 
-class SchechterLuminosityFunction(LuminosityFunction):
+class SchechterLuminosityFunctionModel(LuminosityFunctionModel):
     def __init__(self, input_redshift_grid, m_star, phi_star, alpha, apparent_magnitude_limit, sky_area,
                  cosmology_object):
         """
