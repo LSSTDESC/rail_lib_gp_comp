@@ -11,7 +11,7 @@ from __future__ import (print_function, division, absolute_import,
 from abc import ABC, abstractmethod
 import numpy as np
 
-# rail_lib_gp_comp imports
+# creation imports
 
 
 class GasEmissionModel(ABC):

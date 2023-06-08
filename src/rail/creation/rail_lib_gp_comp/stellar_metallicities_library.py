@@ -12,7 +12,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 from scipy.stats import truncnorm
 
-# rail_lib_gp_comp imports
+# creation imports
 
 
 class StellarMetallicityModel(ABC):

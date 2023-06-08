@@ -9,7 +9,7 @@ from __future__ import (print_function, division, absolute_import,
 
 # External modules
 
-# rail_lib_gp_comp imports
+# creation imports
 
 
 def check_implemented_components(input_component):

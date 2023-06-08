@@ -11,7 +11,7 @@ from __future__ import (print_function, division, absolute_import,
 from abc import ABC, abstractmethod
 from scipy.stats import loguniform
 
-# rail_lib_gp_comp imports
+# creation imports
 
 
 class AGNModel(ABC):

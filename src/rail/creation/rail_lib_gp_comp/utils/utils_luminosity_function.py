@@ -11,7 +11,7 @@ from __future__ import (print_function, division, absolute_import,
 import numpy as np
 import scipy
 
-# rail_lib_gp_comp imports
+# creation imports
 
 
 _LOGMAX = np.log(np.finfo(0.).max)

@@ -12,7 +12,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 from astropy import units as u
 
-# rail_lib_gp_comp imports
+# creation imports
 from utils.utils_luminosity_function import compute_lower_truncation_scaled_schechter_random_variable
 from utils.utils_luminosity_function import gamma_function_integration_for_redshift
 from utils.utils_luminosity_function import get_minimum_limiting_absolute_magnitude, sample_from_schechter_function
