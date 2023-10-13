@@ -1,15 +1,15 @@
 [project]
-name = "rail_lib_gp_comp"
+name = "pz-rail-lib_gp_comp"
 description = "Library of galaxy population modelling components"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Luca Tortorelli", email = "Luca.Tortorelli@physik.lmu.de" }
+    { name = "Luca Tortorelli, LSST DESC PZ WG", email = "Luca.Tortorelli@physik.lmu.de" }
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: BSD License",
+    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python",
@@ -27,11 +27,12 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "qp-prob[full]",
     "coverage",
     "pylint",
     "pytest",
     "pytest-cov",
-    "flake8",
+    "yamllint",
 ]
 
 [build-system]
@@ -39,13 +40,13 @@ requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "src/rail_lib_gp_comp/_version.py"
+write_to = "src/rail/creation/engines/_version.py"
 
 [tool.setuptools.package-data]
 "rail_lib_gp_comp.data" = ["*.txt"]
 
 [tool.coverage.run]
-source = ["rail_lib_gp_comp"]
+source = ["src/rail"]
 branch = true
 
 [tool.coverage.report]
@@ -106,7 +107,20 @@ line_length = 110
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=rail_lib_gp_comp",
+    "--cov=rail.creation.engines",
     "--cov-branch",
     "--cov-report=html"
 ]
+flake8-ignore = "E203"
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+ignore_missing_imports = true
+namespace_packages = true
+plugins = "sqlalchemy.ext.mypy.plugin"
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true
