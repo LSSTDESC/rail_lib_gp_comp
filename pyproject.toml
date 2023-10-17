@@ -20,9 +20,16 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+    "pz-rail-base",
     "numpy",
     "scipy",
-    "astropy"
+    "astropy",
+    "pandas",
+    "dsps",
+    "diffstar",
+    "diffmah",
+    "jaxlib",
+    "h5py"
 ]
 
 [project.optional-dependencies]
