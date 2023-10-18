@@ -5,6 +5,7 @@ from rail.core.stage import RailStage
 from rail.core.data import Hdf5Handle, TableHandle
 from ceci.config import StageParameter as Param
 from rail.core.utils import find_rail_file
+import rail_lib_gp_comp
 
 
 class DiffskyGalaxyPopulationModeler(Modeler):
@@ -14,7 +15,6 @@ class DiffskyGalaxyPopulationModeler(Modeler):
     """
 
     name = "DiffskyGalaxyPopulationModeler"
-    default_files_folder = find_rail_file(os.path.join('examples_data', 'creation_data', 'data'))
     config_options = RailStage.config_options.copy()
 
     config_options.update(diffmah_keys=Param(list, ["diffmah_logmp_fit", "diffmah_mah_logtc",
@@ -96,8 +96,10 @@ class DiffskyGalaxyPopulationModeler(Modeler):
             Hdf5 table storing the population parameters.
         """
         if input_data is None:
-            default_files_folder = find_rail_file(os.path.join('examples_data', 'creation_data', 'data'))
-            input_data = os.path.join(default_files_folder, 'skysim_v3.1.0_red.csv')
+            RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail_lib_gp_comp.__file__), '..', '..'))
+            default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data',
+                                                         'data')
+            input_data = os.path.join(default_files_folder, 'skysim_v3.1.0_red.pq')
         self.set_data('input', input_data)
         self.run()
         self.finalize()
@@ -114,7 +116,7 @@ class DiffskyGalaxyPopulationModeler(Modeler):
         stellar_metallicities = input_skysim_properties[self.config.catalog_metallicity_key]
         stellar_metallicities_scatter = input_skysim_properties[self.config.catalog_metallicity_scatter_key]
         population_parameters = {'mah_params': mah_params, 'ms_params': ms_params, 'q_params': q_params,
-                                 self.config.catalog_redshift_key: redshifts,
-                                 self.config.catalog_metallicity_key: stellar_metallicities,
-                                 self.config.catalog_metallicity_scatter_key: stellar_metallicities_scatter}
+                                 self.config.catalog_redshift_key: redshifts.values,
+                                 self.config.catalog_metallicity_key: stellar_metallicities.values,
+                                 self.config.catalog_metallicity_scatter_key: stellar_metallicities_scatter.values}
         self.add_data('model', population_parameters)

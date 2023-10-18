@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from rail.core.utils import find_rail_file
+import rail_lib_gp_comp
 from rail.creation.engine import Creator
 from rail.core.stage import RailStage
 from rail.core.data import Hdf5Handle
@@ -23,7 +23,6 @@ class DiffskyGalaxyPopulationCreator(Creator):
     """
 
     name = "DiffskyGalaxyPopulationCreator"
-    default_files_folder = find_rail_file(os.path.join('examples_data', 'creation_data', 'data'))
     config_options = RailStage.config_options.copy()
 
     config_options.update(log10_age_universe=Param(float, LGT0, msg='Base-10 log of the age of the universe in Gyr.'),
@@ -245,7 +244,9 @@ class DiffskyGalaxyPopulationCreator(Creator):
 
         """
         if input_data is None:
-            default_files_folder = find_rail_file(os.path.join('examples_data', 'creation_data', 'data'))
+            RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail_lib_gp_comp.__file__), '..', '..'))
+            default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data',
+                                                'data')
             input_data = os.path.join(default_files_folder, 'model_DiffskyGalaxyPopulationModeler.hdf5')
 
         self.config["seed"] = seed
@@ -262,8 +263,7 @@ class DiffskyGalaxyPopulationCreator(Creator):
         functions. The sampled properties are those needed as input for rail_dsps and rail_fsps to work.
         """
         self.model = self.get_data('model')
-
-        redshifts = self.model[self.config.redshift_key][()]
+        redshifts = self.model[self.config.catalog_redshift_key][()]
         stellar_metallicities = self.model[self.config.catalog_metallicity_key][()]
         stellar_metallicities_scatter = self.model[self.config.catalog_metallicity_scatter_key][()]
         mah_params = self.model['mah_params'][()]
@@ -275,7 +275,8 @@ class DiffskyGalaxyPopulationCreator(Creator):
         galaxy_properties = {self.config.catalog_redshift_key: redshifts,
                              self.config.catalog_metallicity_key: stellar_metallicities,
                              self.config.catalog_metallicity_scatter_key: stellar_metallicities_scatter,
-                             self.config.cosmic_time_grid_key: cosmic_time_grid,
+                             self.config.cosmic_time_grid_key: np.full((len(redshifts), len(cosmic_time_grid)),
+                                                                       cosmic_time_grid),
                              self.config.star_formation_history_key: star_formation_histories,
                              self.config.star_formation_rate_key: star_formation_rates,
                              self.config.stellar_mass_history_key: log_stellar_mass_histories,
