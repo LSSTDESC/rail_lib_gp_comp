@@ -4,7 +4,6 @@ from rail.creation.engine import Modeler
 from rail.core.stage import RailStage
 from rail.core.data import Hdf5Handle, TableHandle
 from ceci.config import StageParameter as Param
-from rail.core.utils import find_rail_file
 import rail_lib_gp_comp
 
 
@@ -97,8 +96,7 @@ class DiffskyGalaxyPopulationModeler(Modeler):
         """
         if input_data is None:
             RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail_lib_gp_comp.__file__), '..', '..'))
-            default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data',
-                                                         'data')
+            default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data', 'data')
             input_data = os.path.join(default_files_folder, 'skysim_v3.1.0_red.pq')
         self.set_data('input', input_data)
         self.run()
