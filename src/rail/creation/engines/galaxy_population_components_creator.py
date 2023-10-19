@@ -1,6 +1,6 @@
 import os
 import numpy as np
-import rail_lib_gp_comp
+import rail
 from rail.creation.engine import Creator
 from rail.core.stage import RailStage
 from rail.core.data import Hdf5Handle
@@ -9,7 +9,7 @@ from diffstar.defaults import DEFAULT_N_STEPS, LGT0, FB, T_BIRTH_MIN
 from dsps.constants import T_TABLE_MIN
 from dsps.cosmology import age_at_z, DEFAULT_COSMOLOGY
 from diffstar.sfh import get_sfh_from_mah_kern
-from src.rail.lib_gp_comp.utils.utils import multiInterp2
+from rail.lib_gp_comp.utils.utils import multiInterp2
 from dsps.utils import cumulative_mstar_formed
 from jax import vmap
 from jax import jit as jjit
@@ -244,7 +244,7 @@ class DiffskyGalaxyPopulationCreator(Creator):
 
         """
         if input_data is None:
-            RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail_lib_gp_comp.__file__), '..', '..'))
+            RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail.lib_gp_comp.__file__), '..'))
             default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data',
                                                 'data')
             input_data = os.path.join(default_files_folder, 'model_DiffskyGalaxyPopulationModeler.hdf5')

@@ -25,7 +25,7 @@ from jax import numpy as jnp
 
 # RAIL modules
 from rail.core.utils import find_rail_file
-from src.rail.lib_gp_comp.utils.utils import multiInterp2
+from rail.lib_gp_comp.utils.utils import multiInterp2
 default_files_folder = find_rail_file(os.path.join('examples_data', 'creation_data', 'data'))
 
 
