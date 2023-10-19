@@ -1,19 +1,31 @@
+#! /usr/bin/env python
+
+# Copyright (C) 2023 Luca Tortorelli, LSST DESC PZ WG
+# Author: Luca Tortorelli
+
+# System imports
+from __future__ import (print_function, division, absolute_import,
+                        unicode_literals)
+
+# External modules
 import os
 import numpy as np
-import rail
-from rail.creation.engine import Creator
-from rail.core.stage import RailStage
-from rail.core.data import Hdf5Handle
 from ceci.config import StageParameter as Param
 from diffstar.defaults import DEFAULT_N_STEPS, LGT0, FB, T_BIRTH_MIN
 from dsps.constants import T_TABLE_MIN
 from dsps.cosmology import age_at_z, DEFAULT_COSMOLOGY
 from diffstar.sfh import get_sfh_from_mah_kern
-from rail.lib_gp_comp.utils.utils import multiInterp2
 from dsps.utils import cumulative_mstar_formed
 from jax import vmap
 from jax import jit as jjit
 from jax import numpy as jnp
+
+# RAIL modules
+import rail
+from rail.creation.engine import Creator
+from rail.core.stage import RailStage
+from rail.core.data import Hdf5Handle
+from rail.lib_gp_comp.utils.utils import multiInterp2
 
 
 class DiffskyGalaxyPopulationCreator(Creator):

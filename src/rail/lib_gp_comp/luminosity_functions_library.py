@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-# Copyright (C) 2022 University Observatory, Ludwig-Maximilians-Universitaet Muenchen
+# Copyright (C) 2023 Luca Tortorelli, LSST DESC PZ WG
 # Author: Luca Tortorelli
 
 # System imports

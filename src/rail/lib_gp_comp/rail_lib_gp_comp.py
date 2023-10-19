@@ -1,15 +1,11 @@
 #! /usr/bin/env python
 
-# Copyright (C) 2022 University Observatory, Ludwig-Maximilians-Universitaet Muenchen
+# Copyright (C) 2023 Luca Tortorelli, LSST DESC PZ WG
 # Author: Luca Tortorelli
 
 # System imports
 from __future__ import (print_function, division, absolute_import,
                         unicode_literals)
-
-# External modules
-
-# creation imports
 
 
 def check_implemented_components(input_component):

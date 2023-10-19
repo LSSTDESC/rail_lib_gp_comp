@@ -1,5 +1,17 @@
+#! /usr/bin/env python
+
+# Copyright (C) 2023 Luca Tortorelli, LSST DESC PZ WG
+# Author: Luca Tortorelli
+
+# System imports
+from __future__ import (print_function, division, absolute_import,
+                        unicode_literals)
+
+# External modules
 import os
 import numpy as np
+
+# RAIL modules
 from rail.creation.engine import Modeler
 from rail.core.stage import RailStage
 from rail.core.data import Hdf5Handle, TableHandle
@@ -97,7 +109,7 @@ class DiffskyGalaxyPopulationModeler(Modeler):
         if input_data is None:
             RAIL_LIB_GP_COMP_DIR = os.path.abspath(os.path.join(os.path.dirname(rail.lib_gp_comp.__file__), '..'))
             default_files_folder = os.path.join(RAIL_LIB_GP_COMP_DIR, 'examples_data', 'creation_data', 'data')
-            input_data = os.path.join(default_files_folder, 'skysim_v3.1.0_red.pq')
+            input_data = os.path.join(default_files_folder, 'skysim_v3.1.0_10k_lssty1cut.pq')
         self.set_data('input', input_data)
         self.run()
         self.finalize()
